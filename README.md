@@ -1,2 +1,4 @@
 # CodeWarsSolutions
-A Repository designed to house some of my solutions to select code wars problems
+A Repository designated to store my solutions to select code wars problems.
+Website: https://www.codewars.com/
+---
