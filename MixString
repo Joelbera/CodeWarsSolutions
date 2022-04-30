@@ -1,0 +1,86 @@
+from copy import deepcopy
+
+def mix(s1, s2):    
+    # Create dictionaries
+    dict1 = {}
+    dict2 = {}
+    for idx, val in enumerate(s1): 
+        if not val.isupper() and val.isalpha():
+            if val not in dict1: 
+                dict1[val] = 1
+            else: 
+                dict1[val] += 1
+    for idx, val in enumerate(s2): 
+        if not val.isupper() and val.isalpha():
+            if val not in dict2: 
+                dict2[val] = 1
+            else: 
+                dict2[val] += 1
+    
+    # Clean up values
+    values = {}
+    copy1 = dict1.copy()
+    copy2 = dict2.copy()
+    
+    for i in dict1:
+        if dict1[i] == 1:
+            copy1.pop(i)
+        elif i in dict2: 
+            if dict2[i] > dict1[i]: 
+                values[i] = dict2[i]
+                copy1.pop(i)
+            elif dict2[i] == dict1[i]:
+                values[i] = dict1[i]
+            else:
+                values[i] = dict1[i]
+                copy2.pop(i)
+        else: 
+            values[i] = dict1[i]
+    
+    for i in dict2:
+        if dict2[i] == 1: 
+            copy2.pop(i)
+        else: 
+            values[i] = dict2[i]
+        
+    
+    # Sorting 
+    
+    print(copy1)
+    print(copy2)
+    print(values)
+    
+    listCopy = []
+    for idx, val in enumerate(values): 
+        listCopy.append([val, values[val]])
+            
+    while True: 
+        change = False
+        for i in range(len(listCopy)):
+            print(listCopy[i][1])
+            try:
+                
+                if listCopy[i][1] < listCopy[i+1][1]:
+                    listCopy[i], listCopy[i+1] = listCopy[i+1], listCopy[i]
+                    change = True
+                el if listCopy[i][1] == listCopy[i+1][1]:
+                    if listCopy[i][0] > listCopy[i+1][0] and listCopy[i][0] in copy1 and listCopy[i][0] in copy2:
+                        listCopy[i], listCopy[i+1] = listCopy[i+1], listCopy[i]
+                        change = True
+            except: 
+                continue
+        if change == False: 
+            break
+            
+    # Printing response
+    print(listCopy)
+    for i in range(len(listCopy)): 
+        # Check if present in both
+        if listCopy[i][0] in copy1 and listCopy[i][0] in copy2: 
+            print(f"=:{listCopy[i][1] * listCopy[i][0]}", end='/')
+        # Otherwise
+        elif listCopy[i][0] in copy1: 
+            if sortedCopy[i] == copy1[i]: 
+                print(f"1:{listCopy[i][1] * listCopy[i][0]}", end='/')
+        elif listCopy[i][0] in copy2: 
+            print(f"2:{listCopy[i][1] * listCopy[i][0]}", end='/')
