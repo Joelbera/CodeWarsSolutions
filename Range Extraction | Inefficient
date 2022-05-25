@@ -1,0 +1,35 @@
+def solution(args):
+
+    returnString = ''
+    
+    while len(args) > 0:
+        
+        currentValue = args[0]
+        Range = 1
+        
+        for idx, val in enumerate(args): 
+            if idx == 0: 
+                continue
+            
+            if val == currentValue + 1: 
+                if idx == len(args) - 1: 
+                    if Range >= 3: 
+                        returnString += f"{args[0]}-{args[idx]}"
+                        for i in range(len(args)): 
+                            args.pop(0)
+                        break
+                else: 
+                    Range += 1
+                    currentValue = val
+            else:
+                if Range >= 3: 
+                    returnString += f"{args[0]}-{args[idx-1]},"
+                    for i in range(Range): 
+                        args.pop(0)
+                    break
+                else:
+                    returnString += f"{args[0]},"
+                    args.pop(0)
+                    break
+
+    return returnString
